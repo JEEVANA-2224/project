@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-import numpy as np
+import pandas as pd
 
 # ---------------- Page Config ----------------
 st.set_page_config(
@@ -28,39 +28,41 @@ scaler, lr, knn, rf, bag, ada = load_models()
 # ---------------- User Input ----------------
 st.subheader("Enter Blood Test Values")
 
-features = []
-feature_names = [
-    "Glucose",
-    "Cholesterol",
-    "Hemoglobin",
-    "Platelets",
-    "White Blood Cells",
-    "Red Blood Cells",
-    "Hematocrit",
-    "Mean Corpuscular Volume",
-    "Mean Corpuscular Hemoglobin",
-    "Mean Corpuscular Hemoglobin Concentration",
-    "HbA1c",
-    "LDL Cholesterol",
-    "HDL Cholesterol",
-    "ALT",
-    "AST",
-    "Heart Rate",
-    "Creatinine",
-    "Troponin",
-    "C-reactive Protein",
-    # + the remaining columns from your dataset
-]
+# 🔑 This is the KEY FIX
+expected_columns = scaler.feature_names_in_
 
+# create full input with ALL 24 features
+input_data = pd.DataFrame(columns=expected_columns)
+input_data.loc[0] = 0.0   # default values
 
+# collect user inputs (only 19, rest auto-filled)
+user_inputs = {
+    "Glucose": st.number_input("Glucose", 0.0),
+    "Cholesterol": st.number_input("Cholesterol", 0.0),
+    "Hemoglobin": st.number_input("Hemoglobin", 0.0),
+    "Platelets": st.number_input("Platelets", 0.0),
+    "White Blood Cells": st.number_input("White Blood Cells", 0.0),
+    "Red Blood Cells": st.number_input("Red Blood Cells", 0.0),
+    "Hematocrit": st.number_input("Hematocrit", 0.0),
+    "Mean Corpuscular Volume": st.number_input("Mean Corpuscular Volume", 0.0),
+    "Mean Corpuscular Hemoglobin": st.number_input("Mean Corpuscular Hemoglobin", 0.0),
+    "Mean Corpuscular Hemoglobin Concentration": st.number_input(
+        "Mean Corpuscular Hemoglobin Concentration", 0.0
+    ),
+    "HbA1c": st.number_input("HbA1c", 0.0),
+    "LDL Cholesterol": st.number_input("LDL Cholesterol", 0.0),
+    "HDL Cholesterol": st.number_input("HDL Cholesterol", 0.0),
+    "ALT": st.number_input("ALT", 0.0),
+    "AST": st.number_input("AST", 0.0),
+    "Heart Rate": st.number_input("Heart Rate", 0.0),
+    "Creatinine": st.number_input("Creatinine", 0.0),
+    "Troponin": st.number_input("Troponin", 0.0),
+    "C-reactive Protein": st.number_input("C-reactive Protein", 0.0),
+}
 
-
-
-for name in feature_names:
-    val = st.number_input(name, value=0.0)
-    features.append(val)
-
-input_data = np.array(features).reshape(1, -1)
+# assign inputs to dataframe
+for col, val in user_inputs.items():
+    input_data[col] = val
 
 # ---------------- Model Selection ----------------
 model_name = st.selectbox(
