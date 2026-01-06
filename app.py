@@ -19,23 +19,25 @@ def load_models():
     lr = pickle.load(open("logistic_model.pkl", "rb"))
     knn = pickle.load(open("knn_model.pkl", "rb"))
     rf = pickle.load(open("rf_model.pkl", "rb"))
+    dt = pickle.load(open("dt_model.pkl", "rb"))
+    nb = pickle.load(open("nb_model.pkl", "rb"))
     bag = pickle.load(open("bagging_model.pkl", "rb"))
     ada = pickle.load(open("adaboost_model.pkl", "rb"))
-    return scaler, lr, knn, rf, bag, ada
+    return scaler, lr, knn, rf, dt, nb, bag, ada
 
-scaler, lr, knn, rf, bag, ada = load_models()
+scaler, lr, knn, rf, dt, nb, bag, ada = load_models()
 
 # ---------------- User Input ----------------
 st.subheader("Enter Blood Test Values")
 
-# 🔑 This is the KEY FIX
+# 🔑 KEY FIX: get exact training features
 expected_columns = scaler.feature_names_in_
 
-# create full input with ALL 24 features
+# create dataframe with ALL features
 input_data = pd.DataFrame(columns=expected_columns)
-input_data.loc[0] = 0.0   # default values
+input_data.loc[0] = 0.0  # default fill
 
-# collect user inputs (only 19, rest auto-filled)
+# user inputs (you collect fewer, rest auto-filled)
 user_inputs = {
     "Glucose": st.number_input("Glucose", 0.0),
     "Cholesterol": st.number_input("Cholesterol", 0.0),
@@ -60,14 +62,22 @@ user_inputs = {
     "C-reactive Protein": st.number_input("C-reactive Protein", 0.0),
 }
 
-# assign inputs to dataframe
+# assign values safely
 for col, val in user_inputs.items():
     input_data[col] = val
 
 # ---------------- Model Selection ----------------
 model_name = st.selectbox(
     "Choose Model",
-    ("Logistic Regression", "KNN", "Random Forest", "Bagging", "AdaBoost")
+    (
+        "Logistic Regression",
+        "KNN",
+        "Random Forest",
+        "Decision Tree",
+        "Naive Bayes",
+        "Bagging",
+        "AdaBoost"
+    )
 )
 
 # ---------------- Prediction ----------------
@@ -80,6 +90,10 @@ if st.button("Predict"):
         prediction = knn.predict(input_scaled)
     elif model_name == "Random Forest":
         prediction = rf.predict(input_scaled)
+    elif model_name == "Decision Tree":
+        prediction = dt.predict(input_scaled)
+    elif model_name == "Naive Bayes":
+        prediction = nb.predict(input_scaled)
     elif model_name == "Bagging":
         prediction = bag.predict(input_scaled)
     else:
