@@ -40,26 +40,18 @@ input_data.loc[0] = 0.0  # default fill
 # user inputs (you collect fewer, rest auto-filled)
 user_inputs = {
     "Glucose": st.number_input("Glucose", 0.0),
-    "Cholesterol": st.number_input("Cholesterol", 0.0),
-    "Hemoglobin": st.number_input("Hemoglobin", 0.0),
-    "Platelets": st.number_input("Platelets", 0.0),
-    "White Blood Cells": st.number_input("White Blood Cells", 0.0),
-    "Red Blood Cells": st.number_input("Red Blood Cells", 0.0),
-    "Hematocrit": st.number_input("Hematocrit", 0.0),
-    "Mean Corpuscular Volume": st.number_input("Mean Corpuscular Volume", 0.0),
-    "Mean Corpuscular Hemoglobin": st.number_input("Mean Corpuscular Hemoglobin", 0.0),
-    "Mean Corpuscular Hemoglobin Concentration": st.number_input(
-        "Mean Corpuscular Hemoglobin Concentration", 0.0
-    ),
     "HbA1c": st.number_input("HbA1c", 0.0),
+    "Insulin": st.number_input("Insulin", 0.0),
+    "BMI": st.number_input("BMI", 0.0),
     "LDL Cholesterol": st.number_input("LDL Cholesterol", 0.0),
     "HDL Cholesterol": st.number_input("HDL Cholesterol", 0.0),
-    "ALT": st.number_input("ALT", 0.0),
-    "AST": st.number_input("AST", 0.0),
-    "Heart Rate": st.number_input("Heart Rate", 0.0),
+    "Triglycerides": st.number_input("Triglycerides", 0.0),
+    "Hemoglobin": st.number_input("Hemoglobin", 0.0),
+    "White Blood Cells": st.number_input("White Blood Cells", 0.0),
+    "C-reactive Protein": st.number_input("C-reactive Protein", 0.0),
     "Creatinine": st.number_input("Creatinine", 0.0),
     "Troponin": st.number_input("Troponin", 0.0),
-    "C-reactive Protein": st.number_input("C-reactive Protein", 0.0),
+    "Heart Rate": st.number_input("Heart Rate", 0.0),
 }
 
 # assign values safely
