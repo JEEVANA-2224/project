@@ -31,19 +31,28 @@ st.subheader("Enter Blood Test Values")
 features = []
 feature_names = [
     "Glucose",
+    "Cholesterol",
+    "Hemoglobin",
+    "Platelets",
+    "White Blood Cells",
+    "Red Blood Cells",
+    "Hematocrit",
+    "Mean Corpuscular Volume",
+    "Mean Corpuscular Hemoglobin",
+    "Mean Corpuscular Hemoglobin Concentration",
     "HbA1c",
-    "Insulin",
-    "BMI",
     "LDL Cholesterol",
     "HDL Cholesterol",
-    "Triglycerides",
-    "Hemoglobin",
-    "White Blood Cells",
-    "C-reactive Protein",
+    "ALT",
+    "AST",
+    "Heart Rate",
     "Creatinine",
     "Troponin",
-    "Heart Rate"
+    "C-reactive Protein",
+    # + the remaining columns from your dataset
 ]
+
+
 
 
 
