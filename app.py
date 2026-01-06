@@ -30,9 +30,32 @@ st.subheader("Enter Blood Test Values")
 
 features = []
 feature_names = [
-    "Feature 1", "Feature 2", "Feature 3", "Feature 4",
-    "Feature 5", "Feature 6", "Feature 7", "Feature 8"
+    "Glucose",
+    "Cholesterol",
+    "Hemoglobin",
+    "Platelets",
+    "White Blood Cells",
+    "Red Blood Cells",
+    "Hematocrit",
+    "Mean Corpuscular Volume",
+    "Mean Corpuscular Hemoglobin",
+    "Mean Corpuscular Hemoglobin Concentration",
+    "Insulin",
+    "BMI",
+    "Systolic Blood Pressure",
+    "Diastolic Blood Pressure",
+    "Triglycerides",
+    "HbA1c",
+    "LDL Cholesterol",
+    "HDL Cholesterol",
+    "ALT",
+    "AST",
+    "Heart Rate",
+    "Creatinine",
+    "Troponin",
+    "C-reactive Protein"
 ]
+
 
 for name in feature_names:
     val = st.number_input(name, value=0.0)
